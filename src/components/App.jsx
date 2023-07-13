@@ -1,6 +1,7 @@
 import { NavLink, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 
+import css from './App.module.css';
 import Home from 'pages/Home';
 import Movies from 'pages/Movies';
 import Cast from './Cast/Cast';
@@ -14,12 +15,12 @@ const NavLinkStyled = styled(NavLink)`
   display: block;
   padding: 8px 12px;
   margin-bottom: 12px;
+  margin-right: 12px;
   font-weight: 600;
   font-size: 20px;
   line-height: 1.5;
   border: solid 1px;
   border-radius: 8px;
-  width: 100px;
   &.active {
     color: orange;
 `;
@@ -29,7 +30,7 @@ export const App = () => {
     <Container>
       <header>
         <nav>
-          <ul>
+          <ul className={css.navigation}>
             <li>
               <NavLinkStyled to="/">Home</NavLinkStyled>
             </li>
