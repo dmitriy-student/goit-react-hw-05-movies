@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchFindCredits } from 'services/Api';
+import Error from 'components/Error';
 
 export default function Cast() {
   const [reviewes, setReviewes] = useState([]);
@@ -27,7 +28,7 @@ export default function Cast() {
           <p>{item.name}</p>
           <p>Character: {item.character}</p>
         </div>
-      ))}
+      )) || <Error error={error} />}
     </div>
   );
 }

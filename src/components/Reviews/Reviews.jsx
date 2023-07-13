@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchFindReviews } from 'services/Api';
+import Error from 'components/Error';
 
 export default function Reviews() {
   const [reviewes, setReviewes] = useState([]);
@@ -24,7 +25,7 @@ export default function Reviews() {
           <p>Author: {item.author}</p>
           <p>Reviewe: {item.content}</p>
         </div>
-      ))}
+      )) || <Error error={error} />}
     </div>
   );
 }

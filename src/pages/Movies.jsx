@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { fetchFind } from 'services/Api';
 import MovieCard from '../components/MovieCard';
+import Error from 'components/Error';
 
 export default function Movies() {
   const [value, setValue] = useState('');
@@ -35,12 +36,12 @@ export default function Movies() {
         <button type="submit">Search</button>
       </form>
       <ul>
-        {movies.length > 0 &&
+        {(movies.length > 0 &&
           movies.map(item => (
             <li key={item.id}>
               <MovieCard item={item} />
             </li>
-          ))}
+          ))) || <Error error={error} />}
       </ul>
     </div>
   );
