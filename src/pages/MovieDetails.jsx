@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams, Outlet, useLocation } from 'react-router-dom';
+import {
+  Link,
+  useParams,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { fetchFindDetails } from 'services/Api';
 import imgPlaceholderBig from '../images/placeholder-300x450.png';
 import Error from 'components/Error';
@@ -9,8 +15,17 @@ export default function MovieDetails() {
   const [error, setError] = useState('');
   const [srcImg, setSrcImg] = useState('');
   const { movieId } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
+
+  const handleMoveBack = () => {
+    if (location.state) {
+      navigate(location.state.from);
+      return;
+    }
+
+    navigate('/');
+  };
 
   useEffect(() => {
     if (!movieId) {
@@ -32,7 +47,8 @@ export default function MovieDetails() {
 
   return (
     <>
-      <Link to={location.state.from}>Back to previos page</Link>
+      {/* <Link to={location.state.from}>Back to previos page</Link> */}
+      <button onClick={() => handleMoveBack()}>Go back</button>
       {(
         <div>
           <div>

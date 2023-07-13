@@ -23,6 +23,7 @@ const NavLinkStyled = styled(NavLink)`
   border-radius: 8px;
   &.active {
     color: orange;
+  }
 `;
 
 export const App = () => {
