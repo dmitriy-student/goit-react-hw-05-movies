@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import imgPlaceholderSmall from '../images/placeholder-200x300.png';
+import imgPlaceholderSmall from '../../images/placeholder-200x300.png';
+// import css from './MovieCard.module.css'
 
 export default function MovieCard({ item, backUrl }) {
   const location = useLocation();

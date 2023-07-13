@@ -7,18 +7,26 @@ import Cast from './Cast/Cast';
 import Reviews from './Reviews/Reviews';
 import MovieDetails from 'pages/MovieDetails';
 import NotFound from 'pages/NotFound';
+import Container from './Container/Container';
 
 const NavLinkStyled = styled(NavLink)`
   color: black;
-
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+  border: solid 1px;
+  border-radius: 8px;
+  width: 100px;
   &.active {
     color: orange;
-  }
 `;
 
 export const App = () => {
   return (
-    <>
+    <Container>
       <header>
         <nav>
           <ul>
@@ -42,6 +50,6 @@ export const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-    </>
+    </Container>
   );
 };

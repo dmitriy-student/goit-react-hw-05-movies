@@ -31,7 +31,7 @@ export default function MovieDetails() {
   }, [movie.poster_path]);
 
   return (
-    <div>
+    <>
       <Link to={location.state.from}>Back to previos page</Link>
       {(
         <div>
@@ -60,6 +60,6 @@ export default function MovieDetails() {
           </div>
         </div>
       ) || <Error error={error} />}
-    </div>
+    </>
   );
 }

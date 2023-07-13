@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { fetchFind } from 'services/Api';
-import MovieCard from '../components/MovieCard';
+import css from './Movies.module.css';
+import MovieCard from '../components/MovieCard/MovieCard';
 import Error from 'components/Error';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import Gallery from 'components/Gallery/Gallery';
+import GalleryItem from 'components/GalleryItem/GalleryItem';
 
 export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,21 +41,26 @@ export default function Movies() {
   }, [searchParams]);
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         <label>
-          <input type="text" onChange={handleInput} value={request} />
+          <input
+            className={css.input}
+            type="text"
+            onChange={handleInput}
+            value={request}
+          />
         </label>
         <button type="submit">Search</button>
       </form>
-      <ul>
+      <Gallery>
         {movies.length > 0 &&
           (movies.map(item => (
-            <li key={item.id}>
+            <GalleryItem key={item.id}>
               <MovieCard item={item} backUrl={location} />
-            </li>
+            </GalleryItem>
           )) || <Error error={error} />)}
-      </ul>
-    </div>
+      </Gallery>
+    </>
   );
 }

@@ -1,5 +1,7 @@
 import Error from 'components/Error';
-import MovieCard from 'components/MovieCard';
+import Gallery from 'components/Gallery/Gallery';
+import GalleryItem from 'components/GalleryItem/GalleryItem';
+import MovieCard from 'components/MovieCard/MovieCard';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchTrending } from 'services/Api';
@@ -19,13 +21,13 @@ export default function Home(params) {
   return (
     <>
       <h1>Trending today</h1>
-      <ul>
+      <Gallery>
         {answerApi.map(item => (
-          <li key={item.id}>
+          <GalleryItem key={item.id}>
             <MovieCard item={item} backUrl={location} />
-          </li>
+          </GalleryItem>
         )) || <Error error={error} />}
-      </ul>
+      </Gallery>
     </>
   );
 }
