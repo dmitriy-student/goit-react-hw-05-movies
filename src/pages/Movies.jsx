@@ -36,12 +36,12 @@ export default function Movies() {
         <button type="submit">Search</button>
       </form>
       <ul>
-        {(movies.length > 0 &&
-          movies.map(item => (
+        {movies.length > 0 &&
+          (movies.map(item => (
             <li key={item.id}>
               <MovieCard item={item} />
             </li>
-          ))) || <Error error={error} />}
+          )) || <Error error={error} />)}
       </ul>
     </div>
   );
