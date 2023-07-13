@@ -1,11 +1,13 @@
 import Error from 'components/Error';
 import MovieCard from 'components/MovieCard';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { fetchTrending } from 'services/Api';
 
 export default function Home(params) {
   const [answerApi, setAnswerApi] = useState([]);
   const [error, setError] = useState();
+  const location = useLocation();
 
   useEffect(() => {
     fetchTrending()
@@ -20,7 +22,7 @@ export default function Home(params) {
       <ul>
         {answerApi.map(item => (
           <li key={item.id}>
-            <MovieCard item={item} />
+            <MovieCard item={item} backUrl={location} />
           </li>
         )) || <Error error={error} />}
       </ul>

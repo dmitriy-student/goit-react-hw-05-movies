@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import imgPlaceholderSmall from '../images/placeholder-200x300.png';
 
-export default function MovieCard({ item }) {
+export default function MovieCard({ item, backUrl }) {
   const location = useLocation();
   const [srcUrl, setSrcUrl] = useState('');
   const [srcImg, setSrcImg] = useState('');
@@ -23,9 +23,9 @@ export default function MovieCard({ item }) {
 
   return (
     <div>
-      <Link to={srcUrl}>
-        <img src={srcImg} alt="" />
-        <h2>Title: {item.title}</h2>
+      <Link to={srcUrl} state={{ from: backUrl }}>
+        <img src={srcImg} alt={item.title} />
+        <h2>Movie title: {item.title}</h2>
         <p>Release: {item.release_date}</p>
         <p>Vote: {item.vote_average}</p>
       </Link>
