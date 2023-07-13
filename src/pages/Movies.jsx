@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { fetchFind } from 'services/Api';
+import MovieCard from '../components/MovieCard';
 
 export default function Movies() {
   const [value, setValue] = useState('');
@@ -21,6 +22,8 @@ export default function Movies() {
       .then(resp => resp.json())
       .then(resp => setMovies(resp.results))
       .catch(err => setError(err));
+
+    setValue('');
   };
 
   return (
@@ -30,8 +33,15 @@ export default function Movies() {
           <input type="text" onChange={handleInput} value={value} />
         </label>
         <button type="submit">Search</button>
-          </form>
-          {movies.length > 0 && movies.map(item => )}
+      </form>
+      <ul>
+        {movies.length > 0 &&
+          movies.map(item => (
+            <li key={item.id}>
+              <MovieCard item={item} />
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }

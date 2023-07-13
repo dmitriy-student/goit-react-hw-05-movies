@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams, Outlet } from 'react-router-dom';
 import { fetchFindDetails } from 'services/Api';
+import imgPlaceholderBig from '../images/placeholder-300x450.png';
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState('');
+  const [srcImg, setSrcImg] = useState('');
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -17,14 +19,19 @@ export default function MovieDetails() {
       .catch(err => setError(err));
   }, [movieId]);
 
+  useEffect(() => {
+    if (!movie.poster_path) {
+      setSrcImg(imgPlaceholderBig);
+    } else {
+      setSrcImg(`https://image.tmdb.org/t/p/w300${movie.poster_path}`);
+    }
+  }, [movie.poster_path]);
+
   return (
     <div>
       <button>Back to previos page</button>
       <div>
-        <img
-          src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-          alt={movie.title}
-        />
+        <img src={srcImg} alt={movie.title} />
         <div>
           <h2>{movie.title}</h2>
           <p></p>

@@ -6,7 +6,7 @@ export default function Reviews() {
   const [reviewes, setReviewes] = useState([]);
   const [error, setError] = useState('');
   const { movieId } = useParams();
-  console.log('movieId :>> ', movieId);
+
   useEffect(() => {
     if (!movieId) {
       return;
@@ -16,6 +16,7 @@ export default function Reviews() {
       .then(resp => setReviewes(resp.results))
       .catch(err => setError(err));
   }, [movieId]);
+
   return (
     <div>
       {reviewes.map(item => (

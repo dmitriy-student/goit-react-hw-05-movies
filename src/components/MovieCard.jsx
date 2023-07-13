@@ -1,14 +1,31 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import imgPlaceholderSmall from '../images/placeholder-200x300.png';
 
 export default function MovieCard({ item }) {
+  const location = useLocation();
+  const [srcUrl, setSrcUrl] = useState('');
+  const [srcImg, setSrcImg] = useState('');
+
+  useEffect(() => {
+    if (location.pathname === '/movies') {
+      setSrcUrl(`${item.id}`);
+    } else {
+      setSrcUrl(`movies/${item.id}`);
+    }
+
+    if (!item.poster_path) {
+      setSrcImg(imgPlaceholderSmall);
+    } else {
+      setSrcImg(`https://image.tmdb.org/t/p/w200${item.poster_path}`);
+    }
+  }, [item.id, item.poster_path, location.pathname]);
+
   return (
-    <div key={item.id}>
-      <Link to={`movies/${item.id}`}>
-        <img
-          src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
-          alt=""
-        />
-        <p>Title: {item.title}</p>
+    <div>
+      <Link to={srcUrl}>
+        <img src={srcImg} alt="" />
+        <h2>Title: {item.title}</h2>
         <p>Release: {item.release_date}</p>
         <p>Vote: {item.vote_average}</p>
       </Link>
